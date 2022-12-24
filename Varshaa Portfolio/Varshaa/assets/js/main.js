@@ -166,3 +166,17 @@ themeButton.addEventListener('click', () => {
     localStorage.setItem('selected-theme', getCurrentTheme())
     localStorage.setItem('selected-icon', getCurrentIcon())
 })
+
+function sendEmail() {
+    Email.send({
+        Host : "smtp.mailtrap.io",
+        Username : "<Mailtrap username>",
+        Password : "<Mailtrap password>",
+        To : 'varshaashree14@gmail.com',
+        From : "sender@example.com",
+        Subject : "Test email",
+        Body : "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
+    }).then(
+      message => alert(message)
+    );
+    }
