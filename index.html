@@ -601,19 +601,16 @@
   </div>
   <div class="awards-grid reveal">
     <div class="award-card">
-      
       <div class="award-name">Bravo Award — Engineering Excellence</div>
       <div class="award-org">Walmart Global Tech · June 2025</div>
       <div class="award-desc">Recognized for delivering high-impact AI features that measurably improved customer experience on the Creator platform. Awarded by the Chief Technology Officer.</div>
     </div>
     <div class="award-card">
-      
       <div class="award-name">Fire Fighter Award</div>
       <div class="award-org">Walmart · September 2025</div>
       <div class="award-desc">Honored for rapid resolution of critical AI service production incidents under pressure, ensuring platform SLA compliance with exceptional urgency and teamwork.</div>
     </div>
     <div class="award-card">
-      
       <div class="award-name">Impact Driver Award</div>
       <div class="award-org">Walmart · August 2025</div>
       <div class="award-desc">Awarded for driving quantifiable business outcomes through GenAI-powered personalization features — epic impact for customers, associates, and the company.</div>
@@ -665,9 +662,16 @@
     <a href="https://github.com/vstephne" target="_blank">GitHub</a>
   </div>
 </footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
