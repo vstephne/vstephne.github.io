@@ -7,17 +7,20 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #0f1f3d;
-    --navy-mid: #1b3260;
-    --blue: #2563eb;
-    --blue-light: #3b82f6;
-    --accent: #60a5fa;
-    --gold: #f59e0b;
-    --white: #ffffff;
-    --off-white: #f0f4ff;
-    --gray: #94a3b8;
+    --navy: #071923;
+    --navy-mid: #102a42;
+    --blue: #2962ff;
+    --blue-light: #4dabf5;
+    --accent: #34d399;
+    --gold: #fbbf24;
+    --white: #f8fafc;
+    --off-white: #f1f5f9;
+    --gray: #64748b;
     --gray-light: #e2e8f0;
-    --text: #1e293b;
+    --text: #0f172a;
+    --card-bg: rgba(255,255,255,0.95);
+    --card-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+    --card-shadow-hover: 0 26px 48px rgba(15, 23, 42, 0.16);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -58,7 +61,9 @@
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1e3a5f 100%);
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 55%, var(--blue) 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 18s ease infinite;
     display: flex; align-items: center;
     padding: 8rem 4rem 4rem;
     position: relative; overflow: hidden;
@@ -70,10 +75,11 @@
                 radial-gradient(ellipse at 20% 80%, rgba(96, 165, 250, 0.1) 0%, transparent 50%);
   }
   .hero-grid {
-    position: absolute; inset: 0; opacity: 0.04;
+    position: absolute; inset: 0; opacity: 0.06;
     background-image: linear-gradient(var(--accent) 1px, transparent 1px),
                       linear-gradient(90deg, var(--accent) 1px, transparent 1px);
     background-size: 60px 60px;
+    animation: float 12s ease-in-out infinite;
   }
   .hero-content { position: relative; z-index: 1; max-width: 780px; }
   .hero-tag {
@@ -123,8 +129,13 @@
   .btn-primary {
     background: var(--blue); color: var(--white);
     border: 2px solid var(--blue);
+    box-shadow: 0 14px 30px rgba(41, 98, 255, 0.15);
   }
-  .btn-primary:hover { background: var(--blue-light); border-color: var(--blue-light); transform: translateY(-2px); }
+  .btn-primary:hover {
+    background: var(--blue-light); border-color: var(--blue-light);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 44px rgba(41, 98, 255, 0.22);
+  }
   .btn-outline {
     background: transparent; color: var(--white);
     border: 2px solid rgba(255,255,255,0.3);
@@ -247,19 +258,20 @@
   .projects { background: var(--off-white); }
   .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
   .project-card {
-    background: var(--white);
-    border: 1px solid var(--gray-light);
-    border-radius: 4px; padding: 2rem;
-    transition: all 0.25s;
+    background: var(--card-bg);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 10px; padding: 2.2rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     position: relative; overflow: hidden;
+    box-shadow: var(--card-shadow);
   }
   .project-card::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0;
-    height: 3px; background: var(--blue);
+    height: 4px; background: linear-gradient(90deg, var(--accent), var(--blue));
     transform: scaleX(0); transform-origin: left;
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
   }
-  .project-card:hover { border-color: var(--blue); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(37,99,235,0.1); }
+  .project-card:hover { border-color: rgba(52, 211, 153, 0.4); transform: translateY(-6px) scale(1.01); box-shadow: var(--card-shadow-hover); }
   .project-card:hover::before { transform: scaleX(1); }
   .project-card h3 {
     font-family: 'DM Serif Display', serif;
@@ -341,6 +353,15 @@
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
   .reveal {
     opacity: 0; transform: translateY(30px);
