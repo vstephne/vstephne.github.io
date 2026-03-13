@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Varshaa Shree — AI/ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --navy-mid: #1b3260;
+    --blue: #2563eb;
+    --blue-light: #3b82f6;
+    --accent: #60a5fa;
+    --gold: #f59e0b;
+    --white: #ffffff;
+    --off-white: #f0f4ff;
+    --gray: #94a3b8;
+    --gray-light: #e2e8f0;
+    --text: #1e293b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(15, 31, 61, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(96, 165, 250, 0.15);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem; color: var(--white); letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; font-weight: 400;
+    color: var(--gray); text-decoration: none; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1e3a5f 100%);
+    display: flex; align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(37, 99, 235, 0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(96, 165, 250, 0.1) 0%, transparent 50%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: linear-gradient(var(--accent) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 780px; }
+  .hero-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent);
+    border: 1px solid rgba(96, 165, 250, 0.4);
+    padding: 0.4rem 1rem; border-radius: 2px;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05; color: var(--white);
+    margin-bottom: 0.4rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero-sub {
+    font-size: 1.15rem; color: var(--gray);
+    font-weight: 300; line-height: 1.7;
+    max-width: 580px; margin: 1.5rem 0 2.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-pills {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; padding: 0.35rem 0.9rem;
+    border-radius: 2px; letter-spacing: 0.06em;
+    background: rgba(96, 165, 250, 0.12);
+    border: 1px solid rgba(96, 165, 250, 0.25);
+    color: var(--accent);
+  }
+  .hero-cta { display: flex; gap: 1rem; animation: fadeUp 0.6s 0.4s ease both; }
+  .btn {
+    padding: 0.85rem 2rem; font-size: 0.88rem; font-weight: 600;
+    border-radius: 3px; cursor: pointer; text-decoration: none;
+    transition: all 0.2s; display: inline-block;
+    font-family: 'Outfit', sans-serif; letter-spacing: 0.02em;
+  }
+  .btn-primary {
+    background: var(--blue); color: var(--white);
+    border: 2px solid var(--blue);
+  }
+  .btn-primary:hover { background: var(--blue-light); border-color: var(--blue-light); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    position: absolute; right: 4rem; bottom: 4rem;
+    display: flex; gap: 3rem;
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem; color: var(--white); line-height: 1;
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; color: var(--gray);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 4rem; }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--blue);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--navy); line-height: 1.15; margin-bottom: 3rem;
+  }
+  .section-title em { color: var(--blue); font-style: italic; }
+
+  /* ── ABOUT ── */
+  .about { background: var(--off-white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text p {
+    font-size: 1.05rem; line-height: 1.85; color: #334155;
+    margin-bottom: 1.2rem; font-weight: 300;
+  }
+  .about-text strong { color: var(--navy); font-weight: 600; }
+  .about-skills {}
+  .skill-group { margin-bottom: 2rem; }
+  .skill-group-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--blue);
+    margin-bottom: 0.7rem; font-weight: 500;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .skill-tag {
+    font-size: 0.8rem; padding: 0.3rem 0.75rem;
+    background: var(--white); border: 1px solid var(--gray-light);
+    border-radius: 2px; color: var(--text); font-weight: 400;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover { border-color: var(--blue); color: var(--blue); }
+
+  /* ── EXPERIENCE ── */
+  .experience { background: var(--white); }
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 3rem; padding: 3rem 0;
+    border-bottom: 1px solid var(--gray-light);
+    transition: background 0.2s;
+  }
+  .exp-item:first-child { border-top: 1px solid var(--gray-light); }
+  .exp-left {}
+  .exp-company {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--navy); margin-bottom: 0.3rem;
+  }
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; color: var(--gray);
+    letter-spacing: 0.06em; margin-bottom: 0.5rem;
+  }
+  .exp-loc {
+    font-size: 0.78rem; color: var(--gray); font-weight: 300;
+  }
+  .exp-right {}
+  .exp-title {
+    font-size: 1rem; font-weight: 600; color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+  .exp-role-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--blue);
+    background: rgba(37, 99, 235, 0.08);
+    padding: 0.2rem 0.6rem; border-radius: 2px;
+    margin-bottom: 1.2rem;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .exp-bullets li {
+    font-size: 0.92rem; line-height: 1.7; color: #475569;
+    font-weight: 300; padding-left: 1.2rem; position: relative;
+  }
+  .exp-bullets li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--blue); font-weight: 400;
+  }
+  .exp-bullets li strong { color: var(--navy); font-weight: 600; }
+  .exp-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+  .exp-stack span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; padding: 0.2rem 0.6rem;
+    background: var(--off-white); border: 1px solid var(--gray-light);
+    border-radius: 2px; color: var(--gray); letter-spacing: 0.04em;
+  }
+
+  /* ── PROJECTS ── */
+  .projects { background: var(--off-white); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+    border-radius: 4px; padding: 2rem;
+    transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--blue);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .project-card:hover { border-color: var(--blue); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(37,99,235,0.1); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--navy); margin-bottom: 0.7rem;
+  }
+  .project-card p {
+    font-size: 0.88rem; line-height: 1.7; color: #64748b;
+    font-weight: 300; margin-bottom: 1.2rem;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .project-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem; padding: 0.2rem 0.55rem;
+    background: rgba(37,99,235,0.07);
+    border: 1px solid rgba(37,99,235,0.2);
+    border-radius: 2px; color: var(--blue); letter-spacing: 0.04em;
+  }
+
+  /* ── AWARDS ── */
+  .awards { background: var(--navy); }
+  .awards .section-title { color: var(--white); }
+  .awards .section-title em { color: var(--accent); }
+  .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+  .award-card {
+    border: 1px solid rgba(96,165,250,0.2);
+    border-radius: 4px; padding: 1.5rem;
+    background: rgba(255,255,255,0.04);
+    transition: all 0.2s;
+  }
+  .award-card:hover { background: rgba(255,255,255,0.08); border-color: var(--accent); }
+  .award-name {
+    font-weight: 600; font-size: 0.92rem;
+    color: var(--white); margin-bottom: 0.3rem;
+  }
+  .award-org {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; color: var(--accent);
+    letter-spacing: 0.08em; margin-bottom: 0.5rem;
+  }
+  .award-desc { font-size: 0.82rem; color: var(--gray); font-weight: 300; line-height: 1.6; }
+
+  /* ── EDUCATION ── */
+  .education { background: var(--white); }
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .edu-card {
+    padding: 2rem; border: 1px solid var(--gray-light);
+    border-radius: 4px; transition: all 0.2s;
+  }
+  .edu-card:hover { border-color: var(--blue); }
+  .edu-degree {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem; color: var(--navy); margin-bottom: 0.4rem;
+  }
+  .edu-school { font-size: 0.88rem; color: var(--blue); font-weight: 500; margin-bottom: 0.3rem; }
+  .edu-meta { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--gray); letter-spacing: 0.06em; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 3rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(96,165,250,0.15);
+  }
+  .footer-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--white);
+  }
+  .footer-name span { color: var(--accent); }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; color: var(--gray);
+    text-decoration: none; letter-spacing: 0.08em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 8rem; }
+    .hero-stats { position: static; margin-top: 3rem; justify-content: flex-start; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 1rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VS<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">AI / ML Engineer &nbsp;·&nbsp; Sunnyvale, CA</div>
+    <h1>Varshaa<br><em>Shree</em></h1>
+    <p class="hero-sub">Building production-grade LLM systems, agentic pipelines, and generative AI at scale. 5+ years shipping AI that reaches millions of users.</p>
+    <div class="hero-pills">
+      <span class="pill">LLM Systems</span>
+      <span class="pill">RAG Pipelines</span>
+      <span class="pill">Agentic AI</span>
+      <span class="pill">Constitutional AI</span>
+      <span class="pill">Responsible AI</span>
+      <span class="pill">MLOps</span>
+    </div>
+    <div class="hero-cta">
+      <a href="mailto:varshaashree7@gmail.com" class="btn btn-primary">Get in Touch</a>
+      <a href="https://linkedin.com/in/vs-1306" target="_blank" class="btn btn-outline">LinkedIn</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">5<span>+</span></div>
+      <div class="stat-label">Years in AI</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3<span>+</span></div>
+      <div class="stat-label">Companies</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3.96</div>
+      <div class="stat-label">MS GPA</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="reveal">
+    <div class="section-tag">About</div>
+    <div class="section-title">AI Engineer.<br><em>Full-Stack Builder.</em></div>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I am an <strong>AI/ML Engineer</strong> with 5+ years building production-grade Generative AI, LLM, and agentic systems at scale. My work spans the full AI stack — from prompt engineering and embedding models to MLOps, inference optimization, and cloud deployment.</p>
+      <p>Currently at <strong>Walmart Tech</strong>, I own the AI engineering layer on the Creator Platform — an influencer marketplace serving millions of users — where I have shipped LLM-powered chatbots, RAG-based recommendation engines, and generative AI content tools that drive real business outcomes.</p>
+      <p>I care deeply about building AI that is <strong>helpful, honest, and safe</strong> — with hands-on experience applying responsible AI evaluation frameworks, red-teaming, and Constitutional AI principles in production environments.</p>
+    </div>
+    <div class="about-skills">
+      <div class="skill-group">
+        <div class="skill-group-label">LLMs & Agents</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Claude</span><span class="skill-tag">GPT-4/4o</span><span class="skill-tag">Gemini</span><span class="skill-tag">LLaMA</span><span class="skill-tag">LangChain</span><span class="skill-tag">LangGraph</span><span class="skill-tag">RAG</span><span class="skill-tag">RLHF</span><span class="skill-tag">Fine-tuning</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">ML & Deep Learning</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span><span class="skill-tag">TensorFlow</span><span class="skill-tag">Keras</span><span class="skill-tag">Transformers</span><span class="skill-tag">Hugging Face</span><span class="skill-tag">Scikit-learn</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">MLOps & Cloud</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS SageMaker</span><span class="skill-tag">Docker</span><span class="skill-tag">Kubernetes</span><span class="skill-tag">Airflow</span><span class="skill-tag">MLflow</span><span class="skill-tag">ArgoCD</span><span class="skill-tag">Kafka</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Full Stack</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span><span class="skill-tag">Next.js</span><span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span class="skill-tag">Java</span><span class="skill-tag">Spring Boot</span><span class="skill-tag">TypeScript</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="reveal">
+    <div class="section-tag">Experience</div>
+    <div class="section-title">Where I've<br><em>Shipped AI</em></div>
+  </div>
+  <div class="exp-list">
+
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-company">Walmart Inc.</div>
+        <div class="exp-period">Jul 2023 — Present</div>
+        <div class="exp-loc">Sunnyvale, CA</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-title">Software Engineer III — AI/ML Platform</div>
+        <div class="exp-role-tag">Creator Commerce · Generative AI</div>
+        <ul class="exp-bullets">
+          <li>Built an <strong>LLM-powered agentic chatbot</strong> using GPT-4 and LangChain enabling business teams to query and segment the creator user base by age, gender, and GMV through natural language — reducing campaign setup time by <strong>40%</strong>.</li>
+          <li>Engineered <strong>shoppable posts</strong> end-to-end with AI enhancements: automated video theme generation, AI image enhancement, and LLM-based video summarization to maximize content quality and shopper discoverability.</li>
+          <li>Architected a <strong>goal-based creator rewards engine</strong> tracking performance milestones and awarding points automatically — driving a <strong>30%+ increase in platform revenue</strong>.</li>
+          <li>Designed a <strong>GenAI video recommendation engine</strong> using dense embeddings and RAG delivering hyper-personalized shopping experiences for millions of users.</li>
+          <li>Established <strong>LLM evaluation frameworks and responsible AI guardrails</strong> including red-teaming and alignment checks, adopted as the org-wide standard.</li>
+        </ul>
+        <div class="exp-stack">
+          <span>Next.js</span><span>Python</span><span>LangChain</span><span>Keras</span><span>Spring Boot</span><span>Node.js</span><span>Directus</span><span>Kubernetes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-company">SAP Labs India</div>
+        <div class="exp-period">Sep 2019 — Aug 2021</div>
+        <div class="exp-loc">Bangalore, India</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-title">Associate Developer — AI Factory</div>
+        <div class="exp-role-tag">ML Platform · MLOps</div>
+        <ul class="exp-bullets">
+          <li>Developed <strong>13 production REST APIs</strong> in Python Flask + Docker for SAP's AI Factory platform, enabling scalable ML model training and serving for enterprise clients.</li>
+          <li>Built <strong>Apache Airflow DAGs</strong> for ML job orchestration, improving pipeline efficiency by <strong>20%</strong> and reducing manual retraining intervention.</li>
+          <li>Co-built a <strong>city-scale epidemic AI simulator</strong> with IISc using agent-based modeling (Node.js, Kafka) to model disease dynamics for public health policy evaluation.</li>
+        </ul>
+        <div class="exp-stack">
+          <span>Python</span><span>Flask</span><span>Docker</span><span>Airflow</span><span>Kafka</span><span>Node.js</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-company">Unilever</div>
+        <div class="exp-period">Jan 2019 — Jun 2019</div>
+        <div class="exp-loc">Bangalore, India</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-title">Software Development Intern — ML & Automation</div>
+        <div class="exp-role-tag">ML · RPA</div>
+        <ul class="exp-bullets">
+          <li>Applied <strong>DBSCAN density-based clustering</strong> on sales data to segment customers, achieving <strong>77% accuracy</strong> and surfacing actionable market intelligence.</li>
+          <li>Automated <strong>10 business processes</strong> using Blue Prism RPA, reducing manual operational effort by <strong>76%</strong>.</li>
+        </ul>
+        <div class="exp-stack">
+          <span>Python</span><span>DBSCAN</span><span>Blue Prism</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-left">
+        <div class="exp-company">Mindtree</div>
+        <div class="exp-period">Jan 2018 — Feb 2018</div>
+        <div class="exp-loc">Bangalore, India</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-title">ML Intern</div>
+        <div class="exp-role-tag">NLP · Recommender Systems</div>
+        <ul class="exp-bullets">
+          <li>Developed an <strong>employee sentiment analysis and recommender system</strong> in R using NLP and collaborative filtering to improve HR engagement insights.</li>
+        </ul>
+        <div class="exp-stack">
+          <span>R</span><span>NLP</span><span>Collaborative Filtering</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="reveal">
+    <div class="section-tag">Projects</div>
+    <div class="section-title">Selected<br><em>AI Work</em></div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <h3>Agentic Campaign Intelligence Chatbot</h3>
+      <p>Multi-step LLM agent using LangChain tool-calling and persistent memory to autonomously segment creator audiences, draft campaign briefs, and trigger execution workflows — with responsible AI guardrails preventing off-policy outputs. Reduced marketer effort by 40%.</p>
+      <div class="project-tags">
+        <span class="project-tag">LangChain</span><span class="project-tag">GPT-4</span><span class="project-tag">RAG</span><span class="project-tag">Agentic AI</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <h3>GenAI Video Recommendation Engine</h3>
+      <p>End-to-end RAG system leveraging multimodal embeddings and vector similarity search to serve real-time personalized creator content recommendations at scale, with safety filtering to ensure on-policy outputs for millions of shoppers.</p>
+      <div class="project-tags">
+        <span class="project-tag">RAG</span><span class="project-tag">Embeddings</span><span class="project-tag">Personalization</span><span class="project-tag">Responsible AI</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <h3>AI-Powered Shoppable Posts</h3>
+      <p>Integrated three generative AI features into the shoppable posts pipeline: automated video theme generation, AI image enhancement for quality standardization, and LLM-based video summarization for SEO and recommendation discoverability.</p>
+      <div class="project-tags">
+        <span class="project-tag">Generative AI</span><span class="project-tag">Computer Vision</span><span class="project-tag">LLM</span><span class="project-tag">Keras</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <h3>Cognate Reflex Prediction — CNN / GCNN</h3>
+      <p>Deep sequence modeling to predict missing values in linguistic cognate sets using CNN, Autoencoder, and Graph CNN architectures — an application of neural networks to structured historical language data.</p>
+      <div class="project-tags">
+        <span class="project-tag">CNN</span><span class="project-tag">GCNN</span><span class="project-tag">Sequence Modeling</span><span class="project-tag">Python</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <h3>Huntington's Disease Prediction</h3>
+      <p>ML pipeline taking genome sequences as input to predict the probability of Huntington's Disease — applying classification models to high-stakes, interpretability-critical medical data.</p>
+      <div class="project-tags">
+        <span class="project-tag">ML</span><span class="project-tag">Genomics</span><span class="project-tag">Classification</span><span class="project-tag">Jupyter</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <h3>City-Scale Epidemic AI Simulator</h3>
+      <p>Agent-based simulation platform modeling urban disease spread across millions of agents in collaboration with IISc, used by public health researchers for policy scenario testing — AI deployed for high-stakes societal benefit.</p>
+      <div class="project-tags">
+        <span class="project-tag">Agent-Based AI</span><span class="project-tag">Node.js</span><span class="project-tag">Kafka</span><span class="project-tag">Public Health</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="awards" id="awards">
+  <div class="reveal">
+    <div class="section-tag" style="color: var(--accent)">Recognition</div>
+    <div class="section-title">Awards &<br><em>Achievements</em></div>
+  </div>
+  <div class="awards-grid reveal">
+    <div class="award-card">
+      <div class="award-name">Bravo Award</div>
+      <div class="award-org">Walmart</div>
+      <div class="award-desc">Recognized for delivering high-impact AI features that measurably improved customer experience on the Creator platform.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-name">Fire Fighter Award</div>
+      <div class="award-org">Walmart</div>
+      <div class="award-desc">Honored for rapid resolution of critical AI service production incidents, ensuring platform SLA compliance under tight deadlines.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-name">Impact Driver Award</div>
+      <div class="award-org">Walmart</div>
+      <div class="award-desc">Awarded for driving quantifiable business outcomes through GenAI-powered personalization features at scale.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-name">Innovation Challenge Finalist</div>
+      <div class="award-org">Texas Instruments</div>
+      <div class="award-desc">Selected among top national teams for an innovative technology-driven project proposal.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-name">Innovation Challenge Finalist</div>
+      <div class="award-org">Srishti</div>
+      <div class="award-desc">Advanced to the final qualification round with an AI-enabled solution addressing a real-world challenge.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education" id="education">
+  <div class="reveal">
+    <div class="section-tag">Education</div>
+    <div class="section-title">Academic<br><em>Background</em></div>
+  </div>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-degree">M.S. Computer Science</div>
+      <div class="edu-school">George Mason University</div>
+      <div class="edu-meta">Fairfax, VA &nbsp;·&nbsp; 2021–2023 &nbsp;·&nbsp; GPA 3.96 / 4.0<br>Focus: Machine Learning & AI</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">M.Tech. Software Engineering</div>
+      <div class="edu-school">BITS Pilani</div>
+      <div class="edu-meta">Pilani, India &nbsp;·&nbsp; 2019–2021</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">B.E. Computer Science</div>
+      <div class="edu-school">Visvesvaraya Technological University</div>
+      <div class="edu-meta">Bangalore, India &nbsp;·&nbsp; 2015–2019</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Varshaa <span>Shree</span></div>
+  <div class="footer-links">
+    <a href="mailto:varshaashree7@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/vs-1306" target="_blank">LinkedIn</a>
+    <a href="https://github.com/vstephne" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
