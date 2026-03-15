@@ -31,15 +31,49 @@
                   linear-gradient(135deg, var(--bg2) 0%, var(--bg) 60%, #0f1f3c 100%);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       padding: 3rem 1.5rem;
+      scroll-behavior: smooth;
     }
 
     #root {
       width: 100%;
       max-width: 1100px;
+      margin: 0 auto;
+      padding-bottom: 3.5rem;
+    }
+
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      margin: 0 0 2rem;
+      padding: 0.9rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar a {
+      font-weight: 600;
+      color: rgba(248, 250, 252, 0.87);
+      text-decoration: none;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .navbar a:hover {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .navbar a[href^="#"]::after {
+      content: " ⬇";
+      opacity: 0.7;
+      font-size: 0.85rem;
     }
 
     .card {
@@ -102,6 +136,47 @@
     .btn:hover {
       transform: translateY(-2px);
       filter: brightness(1.05);
+    }
+
+    .btn.secondary {
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: rgba(248, 250, 252, 0.9);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.3);
+    }
+
+    .btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .scroll-hint {
+      margin-top: 1.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      color: rgba(248, 250, 252, 0.78);
+      font-size: 0.95rem;
+      opacity: 0.9;
+      animation: hintPulse 1.2s ease-in-out infinite alternate;
+    }
+
+    .scroll-hint span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .scroll-hint svg {
+      width: 18px;
+      height: 18px;
+      fill: rgba(248, 250, 252, 0.8);
+    }
+
+    @keyframes hintPulse {
+      from { opacity: 0.65; transform: translateY(0); }
+      to { opacity: 0.9; transform: translateY(-4px); }
     }
 
     .window {
@@ -255,6 +330,126 @@
       text-decoration: underline;
     }
 
+    /* ---- Extra Portfolio Sections ---- */
+    section {
+      margin-top: 3.5rem;
+      padding: 2.5rem 2rem;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    section h2 {
+      margin: 0 0 1rem;
+      font-size: 1.8rem;
+      letter-spacing: -0.01em;
+      color: rgba(248, 250, 252, 0.95);
+    }
+
+    section p {
+      margin: 0 0 1.2rem;
+      line-height: 1.65;
+      color: rgba(248, 250, 252, 0.78);
+    }
+
+    .experience .exp-list {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1.5rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .exp-company {
+      font-weight: 700;
+      color: rgba(248, 250, 252, 0.94);
+      margin-bottom: 0.35rem;
+    }
+
+    .exp-period {
+      font-size: 0.9rem;
+      color: rgba(248, 250, 252, 0.7);
+      margin-bottom: 0.35rem;
+    }
+
+    .exp-bullets {
+      padding-left: 1.2rem;
+      margin: 0;
+    }
+
+    .exp-bullets li {
+      color: rgba(248, 250, 252, 0.75);
+      margin-bottom: 0.6rem;
+    }
+
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .award-card {
+      padding: 1.3rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .award-name {
+      color: rgba(248, 250, 252, 0.92);
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .award-org {
+      color: rgba(248, 250, 252, 0.75);
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+    }
+
+    .award-desc {
+      color: rgba(248, 250, 252, 0.7);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .edu-card {
+      padding: 1.4rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .edu-degree {
+      font-weight: 700;
+      color: rgba(248, 250, 252, 0.92);
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-school {
+      color: rgba(248, 250, 252, 0.76);
+      margin-bottom: 0.25rem;
+    }
+
+    .edu-meta {
+      color: rgba(248, 250, 252, 0.7);
+      font-size: 0.9rem;
+    }
+
     @media (max-width: 860px) {
       .window-body { padding: 1.8rem 1.6rem 2.3rem; }
       .girl { left: 1.6rem; width: 128px; }
@@ -305,38 +500,152 @@
       );
     }
 
-    function App() {
-      const [open, setOpen] = useState(false);
-
-      useEffect(() => {
-        const timer = setTimeout(() => setOpen(true), 600);
-        return () => clearTimeout(timer);
-      }, []);
-
+    function NavBar() {
       return (
-        <div className="card">
-          <h1>
-            Varshaa <span>Shree</span>
-          </h1>
-          <p className="lead">
-            AI/ML engineer specializing in LLM systems, RAG pipelines, and agentic AI. Explore the demo window to see a quick animated greeting and learn more about my work.
-          </p>
-
+        <nav className="navbar">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#awards">Awards</a>
+          <a href="#education">Education</a>
           <a
-            className="btn"
             href="https://vstephne.github.io/ai-architecture-demo/"
             target="_blank"
             rel="noopener"
           >
-            Open AI Architecture Demo
+            AI Demo
           </a>
+        </nav>
+      );
+    }
 
-          <IntroWindow open={open} onClose={() => setOpen(false)} />
+    function App() {
+      const [open, setOpen] = useState(false);
+      const [showScrollHint, setShowScrollHint] = useState(false);
 
-          <div className="footer">
-            Hosted on GitHub Pages • Built with React (CDN) &amp; lightweight CSS animation.
+      useEffect(() => {
+        const timer = setTimeout(() => {
+          setOpen(true);
+          setShowScrollHint(true);
+        }, 600);
+        return () => clearTimeout(timer);
+      }, []);
+
+      useEffect(() => {
+        if (!open) return;
+
+        const scrollTimer = setTimeout(() => {
+          const about = document.getElementById('about');
+          if (about) {
+            about.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          setShowScrollHint(false);
+        }, 2600);
+
+        return () => clearTimeout(scrollTimer);
+      }, [open]);
+
+      return (
+        <main>
+          <NavBar />
+
+          <div className="card">
+            <h1>
+              Varshaa <span>Shree</span>
+            </h1>
+            <p className="lead">
+              AI/ML engineer specializing in LLM systems, RAG pipelines, and agentic AI. Explore the demo window to see a quick animated greeting and learn more about my work.
+            </p>
+
+            <a
+              className="btn"
+              href="https://vstephne.github.io/ai-architecture-demo/"
+              target="_blank"
+              rel="noopener"
+            >
+              Open AI Architecture Demo
+            </a>
+
+            <a className="btn secondary" href="#about">
+              View full profile
+            </a>
+
+            {showScrollHint && (
+              <div className="scroll-hint" aria-live="polite">
+                <span>
+                  Scroll down to explore
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 16.5l-5-5 1.4-1.4L12 13.7l3.6-3.6 1.4 1.4-5 5z" />
+                  </svg>
+                </span>
+              </div>
+            )}
+
+            <IntroWindow open={open} onClose={() => setOpen(false)} />
+
+            <div className="footer">
+              Hosted on GitHub Pages • Built with React (CDN) &amp; lightweight CSS animation.
+            </div>
           </div>
-        </div>
+
+          <section className="about" id="about">
+            <h2>About</h2>
+            <p>
+              I'm an AI/ML engineer with 5+ years building production-grade generative AI and LLM systems. My work spans prompt engineering, RAG pipelines, MLOps, and responsible AI.
+            </p>
+          </section>
+
+          <section className="experience" id="experience">
+            <h2>Experience</h2>
+            <div className="exp-list">
+              <div className="exp-item">
+                <div>
+                  <div className="exp-company">Walmart Inc.</div>
+                  <div className="exp-period">Jul 2023 — Present</div>
+                  <div className="exp-loc">Sunnyvale, CA</div>
+                </div>
+                <div>
+                  <div className="exp-title">Software Engineer III — AI/ML Platform</div>
+                  <ul className="exp-bullets">
+                    <li>Built agentic chatbot tools for creator segmenting, reducing setup time by 40%.</li>
+                    <li>Designed RAG recommendation engines and deployed safe LLM guardrails org-wide.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="awards" id="awards">
+            <h2>Awards</h2>
+            <div className="awards-grid">
+              <div className="award-card">
+                <div className="award-name">Bravo Award — Engineering Excellence</div>
+                <div className="award-org">Walmart Global Tech · June 2025</div>
+                <div className="award-desc">Recognized for delivering high-impact AI features that measurably improved customer experience.</div>
+              </div>
+              <div className="award-card">
+                <div className="award-name">Fire Fighter</div>
+                <div className="award-org">Walmart · September 2025</div>
+                <div className="award-desc">Honored for rapid incident response and maintaining SLA compliance during critical releases.</div>
+              </div>
+            </div>
+          </section>
+
+          <section className="education" id="education">
+            <h2>Education</h2>
+            <div className="edu-grid">
+              <div className="edu-card">
+                <div className="edu-degree">M.S. Computer Science</div>
+                <div className="edu-school">George Mason University</div>
+                <div className="edu-meta">Fairfax, VA · 2021–2023 · GPA 3.96</div>
+              </div>
+              <div className="edu-card">
+                <div className="edu-degree">M.Tech. Software Engineering</div>
+                <div className="edu-school">BITS Pilani</div>
+                <div className="edu-meta">Pilani, India · 2019–2021</div>
+              </div>
+            </div>
+          </section>
+        </main>
       );
     }
 
