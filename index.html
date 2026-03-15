@@ -336,6 +336,109 @@
       color: rgba(15, 23, 42, 0.76);
     }
 
+    .subtitle {
+      margin: 0.55rem 0 1.3rem;
+      font-size: 1.15rem;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.9s ease-out forwards;
+      animation-delay: 0.4s;
+      color: rgba(248, 250, 252, 0.82);
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle::after {
+      content: '';
+      display: inline-block;
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-left: 0.5rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #34d399, #60a5fa);
+      animation: glow 1.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: brightness(0.9); }
+      to { filter: brightness(1.4); }
+    }
+
+    .girl {
+      position: absolute;
+      left: 2.3rem;
+      bottom: 0;
+      width: 140px;
+      height: auto;
+      transform: translateY(30px);
+      opacity: 0;
+      animation: girlPop 0.9s 0.7s ease-out forwards, girlFloat 4s 1.7s ease-in-out infinite alternate;
+    }
+
+    @keyframes girlFloat {
+      from { transform: translateY(0) rotate(0.1deg); }
+      to { transform: translateY(-8px) rotate(-0.4deg); }
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1.2rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      text-decoration: none;
+      color: rgba(248, 250, 252, 0.9);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .contact-card:hover {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-2px);
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.12);
+      font-size: 1.4rem;
+    }
+
+    .contact-title {
+      font-weight: 700;
+      color: rgba(248, 250, 252, 0.92);
+    }
+
+    .contact-sub {
+      font-size: 0.85rem;
+      color: rgba(248, 250, 252, 0.74);
+    }
+
+    .award-icon {
+      margin-right: 0.5rem;
+      font-size: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .award-name {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
     .close {
       position: absolute;
       top: 1.1rem;
@@ -545,6 +648,7 @@
           <a href="#experience">Experience</a>
           <a href="#awards">Awards</a>
           <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
           <a
             href="https://vstephne.github.io/ai-architecture-demo/"
             target="_blank"
@@ -590,22 +694,19 @@
             <h1>
               Varshaa <span>Shree</span>
             </h1>
-            <p className="lead">
-              AI/ML engineer specializing in LLM systems, RAG pipelines, and agentic AI. Explore the demo window to see a quick animated greeting and learn more about my work.
-            </p>
+          <div className="subtitle">Interested in AI, agents, and responsible systems.</div>
+          <p className="lead">
+            I build production AI systems (LLMs, RAG, and agents) that bridge research and real-world products. Browse below to see my work, awards, and ways to connect.
+          </p>
 
-            <a
-              className="btn"
-              href="https://vstephne.github.io/ai-architecture-demo/"
-              target="_blank"
-              rel="noopener"
-            >
-              Open AI Architecture Demo
-            </a>
-
-            <a className="btn secondary" href="#about">
-              View full profile
-            </a>
+          <a
+            className="btn"
+            href="https://vstephne.github.io/ai-architecture-demo/"
+            target="_blank"
+            rel="noopener"
+          >
+            Open AI Architecture Demo
+          </a>
 
             {showScrollHint && (
               <div className="scroll-hint" aria-live="polite">
@@ -646,6 +747,37 @@
                   <ul className="exp-bullets">
                     <li>Built agentic chatbot tools for creator segmenting, reducing setup time by 40%.</li>
                     <li>Designed RAG recommendation engines and deployed safe LLM guardrails org-wide.</li>
+                    <li>Owned monitoring and incident response for LLM pipelines serving millions of requests monthly.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="exp-item">
+                <div>
+                  <div className="exp-company">AI Startup (Stealth)</div>
+                  <div className="exp-period">Jan 2022 — Jun 2023</div>
+                  <div className="exp-loc">Remote</div>
+                </div>
+                <div>
+                  <div className="exp-title">Lead ML Engineer</div>
+                  <ul className="exp-bullets">
+                    <li>Built conversational AI pipelines with retrieval augmentation, boosting user engagement by 60%.</li>
+                    <li>Implemented automated dataset labeling and evaluation tooling for faster iteration.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="exp-item">
+                <div>
+                  <div className="exp-company">Research Lab / University</div>
+                  <div className="exp-period">Aug 2019 — Dec 2021</div>
+                  <div className="exp-loc">Washington, DC</div>
+                </div>
+                <div>
+                  <div className="exp-title">Research Intern / Engineering Intern</div>
+                  <ul className="exp-bullets">
+                    <li>Published work on scalable RL and multi-agent systems while prototyping production-grade tooling.</li>
+                    <li>Collaborated cross-functionally on model evaluation, data pipelines, and deployment best practices.</li>
                   </ul>
                 </div>
               </div>
@@ -656,14 +788,19 @@
             <h2>Awards</h2>
             <div className="awards-grid">
               <div className="award-card">
-                <div className="award-name">🏆 Bravo Award — Engineering Excellence</div>
+                <div className="award-name"><span className="award-icon">🏆</span> Bravo Award — Engineering Excellence</div>
                 <div className="award-org">Walmart Global Tech · June 2025</div>
                 <div className="award-desc">Recognized for delivering high-impact AI features that measurably improved customer experience.</div>
               </div>
               <div className="award-card">
-                <div className="award-name">🔥 Fire Fighter</div>
+                <div className="award-name"><span className="award-icon">🔥</span> Fire Fighter</div>
                 <div className="award-org">Walmart · September 2025</div>
                 <div className="award-desc">Honored for rapid incident response and maintaining SLA compliance during critical releases.</div>
+              </div>
+              <div className="award-card">
+                <div className="award-name"><span className="award-icon">🚀</span> Innovation Sprint Winner</div>
+                <div className="award-org">Internal Hackathon · March 2024</div>
+                <div className="award-desc">Led a cross-functional prototype that combined agentic workflows and LLM summarization.</div>
               </div>
             </div>
           </section>
@@ -681,6 +818,34 @@
                 <div className="edu-school">BITS Pilani</div>
                 <div className="edu-meta">Pilani, India · 2019–2021</div>
               </div>
+            </div>
+          </section>
+
+          <section className="contact" id="contact">
+            <h2>Contact</h2>
+            <p>Reach out for collaborations, AI product work, or just to say hi.</p>
+            <div className="contact-grid">
+              <a className="contact-card" href="https://github.com/vstephne" target="_blank" rel="noopener">
+                <div className="contact-icon" aria-hidden="true">🐙</div>
+                <div>
+                  <div className="contact-title">GitHub</div>
+                  <div className="contact-sub">github.com/vstephne</div>
+                </div>
+              </a>
+              <a className="contact-card" href="https://www.linkedin.com/in/varsthaaashree" target="_blank" rel="noopener">
+                <div className="contact-icon" aria-hidden="true">💼</div>
+                <div>
+                  <div className="contact-title">LinkedIn</div>
+                  <div className="contact-sub">linkedin.com/in/varshaa-shree</div>
+                </div>
+              </a>
+              <a className="contact-card" href="mailto:hello@varshaa.sh">
+                <div className="contact-icon" aria-hidden="true">✉️</div>
+                <div>
+                  <div className="contact-title">Email</div>
+                  <div className="contact-sub">hello@varshaa.sh</div>
+                </div>
+              </a>
             </div>
           </section>
         </main>
