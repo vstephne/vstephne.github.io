@@ -1221,6 +1221,119 @@
   document.querySelectorAll('.section').forEach(s=>obs.observe(s));
 })();
 
+/* ── Chatbot ── */
+(function(){
+  const KB=[
+    {k:['who are you','about you','tell me about','introduce'],a:"I'm Varshaa Shree — a Generative AI Engineer at Walmart Global Tech based in Sunnyvale, CA. I build LLM systems, RAG pipelines, and agentic workflows at production scale."},
+    {k:['current job','work now','working','walmart','role','position','title'],a:"I currently work at Walmart Global Tech as a Generative AI Engineer / Software Engineer III (Jul 2023 — Present). I lead LLM pipeline design, agentic tools, and AI safety infrastructure."},
+    {k:['experience','work history','previous','past','intern','sap','unilever'],a:"My experience:\n• Walmart Global Tech — SWE III Intern (Jun–Aug 2022)\n• SAP Labs India — Associate Developer (Aug 2019–Jul 2021)\n• Unilever / Technoshala — Intern (Jan–Jun 2019)"},
+    {k:['skill','tech','stack','language','tool','framework','python','llm','rag','aws'],a:"My core stack: Python, LLMs, RAG, LangChain, Vector DBs, Agents, Guardrails, MLOps, AWS. Also Java, Spring Boot, Scala, Kafka, Angular, Docker, Kubernetes."},
+    {k:['education','degree','university','master','gmu','george mason','gpa'],a:"I hold an M.S. from George Mason University with a 3.96 GPA. I also have a B.Tech from India (VIT or equivalent)."},
+    {k:['award','recognition','bravo','fire','impact','achievement'],a:"I've received 3 Walmart Global Tech awards:\n• Bravo Award — Engineering Excellence (Jun 2025)\n• Impact Driver Award (Aug 2025)\n• Fire Fighter Award — incident response (Aug 2025)"},
+    {k:['project','demo','live','architecture','chatbot','llm guide'],a:"I have two live AI demos:\n• AI Architecture Diagram Generator — describe a system, Claude designs the stack\n• LLM Guide Chatbot — explains LLMs to beginners\nBoth built with Claude API + Node.js, deployed on Vercel."},
+    {k:['contact','email','reach','linkedin','github'],a:"You can reach me at varshaashre7@gmail.com, on LinkedIn at linkedin.com/in/vs-1306, or on GitHub at github.com/vstephne."},
+    {k:['ai','generative','llm','rag','agent','guardrail','safety'],a:"My AI focus is practical GenAI: LLM pipelines, RAG with dense retrieval, agentic tool-calling workflows, and org-wide safety guardrails (PII detection, hallucination scoring, content filtering)."},
+    {k:['hello','hi','hey','howdy','sup'],a:"Hey! I'm Varshaa's portfolio assistant. Ask me about her experience, skills, projects, or how to get in touch."},
+    {k:['bye','goodbye','thanks','thank you'],a:"Thanks for stopping by! Feel free to reach out at varshaashre7@gmail.com."},
+  ];
+  function respond(msg){
+    const m=msg.toLowerCase();
+    for(const e of KB){if(e.k.some(k=>m.includes(k)))return e.a;}
+    return "I'm not sure about that — try asking about Varshaa's experience, skills, projects, education, or contact info.";
+  }
+
+  // Inject CSS
+  const s=document.createElement('style');
+  s.textContent=`
+    #chat-btn{position:fixed;bottom:1.6rem;right:1.6rem;z-index:900;width:52px;height:52px;border-radius:50%;
+      background:linear-gradient(135deg,#2dd4bf,#3b82f6);border:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 20px rgba(45,212,191,0.4);transition:transform 0.2s,box-shadow 0.2s;}
+    #chat-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(45,212,191,0.55);}
+    #chat-btn svg{width:24px;height:24px;stroke:#04080f;fill:none;stroke-width:2;}
+    #chat-panel{position:fixed;bottom:5rem;right:1.6rem;z-index:900;width:330px;max-height:480px;
+      background:#07101f;border:1px solid rgba(255,255,255,0.12);border-radius:16px;
+      display:flex;flex-direction:column;overflow:hidden;
+      box-shadow:0 16px 48px rgba(0,0,0,0.6);
+      transform:translateY(16px) scale(0.96);opacity:0;pointer-events:none;
+      transition:transform 0.22s ease,opacity 0.22s ease;}
+    #chat-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
+    .chat-head{padding:0.85rem 1rem;background:linear-gradient(135deg,rgba(45,212,191,0.1),rgba(59,130,246,0.08));
+      border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:0.6rem;}
+    .chat-head-dot{width:8px;height:8px;border-radius:50%;background:#2dd4bf;
+      box-shadow:0 0 6px #2dd4bf;animation:live 2s ease-in-out infinite;}
+    .chat-head-title{font-size:0.86rem;font-weight:600;color:#e2e8f6;}
+    .chat-head-sub{font-size:0.72rem;color:rgba(226,232,246,0.45);margin-left:auto;}
+    .chat-msgs{flex:1;overflow-y:auto;padding:0.85rem;display:flex;flex-direction:column;gap:0.6rem;
+      scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.1) transparent;}
+    .msg{max-width:82%;padding:0.55rem 0.8rem;border-radius:12px;font-size:0.82rem;line-height:1.5;white-space:pre-wrap;}
+    .msg.bot{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);
+      color:#e2e8f6;align-self:flex-start;border-bottom-left-radius:4px;}
+    .msg.user{background:linear-gradient(135deg,rgba(45,212,191,0.18),rgba(59,130,246,0.18));
+      border:1px solid rgba(45,212,191,0.2);color:#e2e8f6;align-self:flex-end;border-bottom-right-radius:4px;}
+    .chat-form{display:flex;gap:0.5rem;padding:0.7rem;border-top:1px solid rgba(255,255,255,0.07);}
+    .chat-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+      border-radius:8px;padding:0.5rem 0.75rem;font-size:0.82rem;color:#e2e8f6;
+      font-family:inherit;outline:none;transition:border-color 0.15s;}
+    .chat-input:focus{border-color:rgba(45,212,191,0.4);}
+    .chat-input::placeholder{color:rgba(226,232,246,0.3);}
+    .chat-send{width:36px;height:36px;border-radius:8px;border:none;cursor:pointer;flex-shrink:0;
+      background:linear-gradient(135deg,#2dd4bf,#3b82f6);display:flex;align-items:center;justify-content:center;
+      transition:transform 0.15s;}
+    .chat-send:hover{transform:scale(1.06);}
+    .chat-send svg{width:15px;height:15px;stroke:#04080f;fill:none;stroke-width:2.5;}
+    @media(max-width:400px){#chat-panel{width:calc(100vw - 2rem);right:1rem;}
+  `;
+  document.head.appendChild(s);
+
+  // Inject HTML
+  document.body.insertAdjacentHTML('beforeend',`
+    <button id="chat-btn" aria-label="Open chat" onclick="toggleChat()">
+      <svg id="chat-icon-open" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <svg id="chat-icon-close" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div id="chat-panel">
+      <div class="chat-head">
+        <span class="chat-head-dot"></span>
+        <span class="chat-head-title">Ask about Varshaa</span>
+        <span class="chat-head-sub">AI assistant</span>
+      </div>
+      <div class="chat-msgs" id="chat-msgs">
+        <div class="msg bot">Hi! Ask me anything about Varshaa — her experience, skills, projects, or how to reach her.</div>
+      </div>
+      <form class="chat-form" id="chat-form">
+        <input class="chat-input" id="chat-input" type="text" placeholder="Ask a question…" autocomplete="off"/>
+        <button class="chat-send" type="submit">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  `);
+
+  window.toggleChat=function(){
+    const p=document.getElementById('chat-panel');
+    const o=p.classList.toggle('open');
+    document.getElementById('chat-icon-open').style.display=o?'none':'block';
+    document.getElementById('chat-icon-close').style.display=o?'block':'none';
+    if(o)document.getElementById('chat-input').focus();
+  };
+
+  document.getElementById('chat-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    const inp=document.getElementById('chat-input');
+    const msgs=document.getElementById('chat-msgs');
+    const text=inp.value.trim();
+    if(!text)return;
+    msgs.insertAdjacentHTML('beforeend',`<div class="msg user">${text}</div>`);
+    inp.value='';
+    setTimeout(()=>{
+      msgs.insertAdjacentHTML('beforeend',`<div class="msg bot">${respond(text)}</div>`);
+      msgs.scrollTop=msgs.scrollHeight;
+    },320);
+    msgs.scrollTop=msgs.scrollHeight;
+  });
+})();
+
 /* ── Lightbox ── */
 function openLightbox(src){
   document.getElementById('lightbox-img').src=src;
