@@ -214,6 +214,54 @@
 
     /* ── AI UTILIZATION ── */
     .aiu-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(230px,1fr)); gap: 0.95rem; }
+
+    /* ── LIVE PROJECTS ── */
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 1.2rem; }
+    .proj-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem 1.5rem 1.3rem;
+      display: flex; flex-direction: column; gap: 0.85rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .proj-card:hover { border-color: rgba(59,130,246,0.3); transform: translateY(-3px); }
+    .proj-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+    .proj-card-icon {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(45,212,191,0.18));
+      border: 1px solid rgba(59,130,246,0.2);
+    }
+    .proj-card-icon svg { width: 20px; height: 20px; stroke: var(--teal); }
+    .proj-live-dot {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.72rem; color: var(--green); font-weight: 500;
+    }
+    .proj-live-dot::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      animation: pulse 2s infinite;
+    }
+    .proj-card h3 { font-size: 1rem; font-weight: 700; color: var(--text); }
+    .proj-card p  { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .proj-tag {
+      padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.72rem; font-weight: 500;
+      background: rgba(99,102,241,0.12); color: var(--indigo);
+      border: 1px solid rgba(99,102,241,0.2);
+    }
+    .proj-link {
+      margin-top: auto;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.55rem 1rem; border-radius: 8px; font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer; font-family: inherit;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      color: #04080f; width: fit-content;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .proj-link:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,0.3); }
     .aiu-card {
       padding: 1.2rem 1.3rem; border-radius: 11px;
       background: rgba(255,255,255,0.025); border: 1px solid var(--border);
@@ -471,7 +519,8 @@
     <a href="#certifications">Certifications</a>
     <a href="#education">Education</a>
     <a href="#contact">Contact</a>
-    <a class="nav-cta" href="https://vstephne.github.io/ai-architecture-demo/" target="_blank" rel="noopener">Live AI Demo</a>
+    <a href="#live-projects">Live Projects</a>
+    <a class="nav-cta" href="#live-projects">Live AI Demos</a>
   </nav>
 
   <!-- HERO -->
@@ -486,9 +535,9 @@
         My focus is practical AI: turning state-of-the-art models into reliable, measurable outcomes.
       </p>
       <div class="hero-btns">
-        <a class="btn btn-primary" href="https://vstephne.github.io/ai-architecture-demo/" target="_blank" rel="noopener">
+        <a class="btn btn-primary" href="#live-projects">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          AI Architecture Demo
+          Live AI Demos
         </a>
         <a class="btn btn-ghost" href="#experience">View Experience</a>
       </div>
@@ -713,6 +762,64 @@
           <span class="aiu-title">AI-Driven Prototyping</span>
         </div>
         <div class="aiu-desc">Rapidly prototype AI-powered product features — LLM summarisation tools, conversational search, intelligent recommendations — turning ideas into demoable systems in days.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LIVE PROJECTS -->
+  <div class="section" id="live-projects">
+    <div class="sec-head">
+      <div class="sec-icon si-teal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="1.8"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
+      <div>
+        <h2>Live AI Projects</h2>
+        <div class="sec-sub">Deployed tools built with Claude — open and interactive</div>
+      </div>
+    </div>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-card-head">
+          <div class="proj-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <span class="proj-live-dot">Live</span>
+        </div>
+        <h3>AI Architecture Diagram Generator</h3>
+        <p>Describe a system in plain English and Claude AI designs a full tech stack diagram — showing components, data flow, and connections.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Claude API</span>
+          <span class="proj-tag">Mermaid.js</span>
+          <span class="proj-tag">Vercel</span>
+          <span class="proj-tag">Node.js</span>
+        </div>
+        <a class="proj-link" href="https://ai-architecture-demo.vercel.app" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Open Demo
+        </a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-head">
+          <div class="proj-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <span class="proj-live-dot">Live</span>
+        </div>
+        <h3>LLM Guide Chatbot</h3>
+        <p>An AI chatbot that explains Large Language Models to beginners — covering RAG, embeddings, prompting, fine-tuning, and more in plain language.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Claude API</span>
+          <span class="proj-tag">Multi-turn Chat</span>
+          <span class="proj-tag">Vercel</span>
+          <span class="proj-tag">Node.js</span>
+        </div>
+        <a class="proj-link" href="https://llm-guide-chatbot-vstephne-9alz1b4hw-vstephnes-projects.vercel.app" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Open Demo
+        </a>
       </div>
 
     </div>
