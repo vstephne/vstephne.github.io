@@ -450,6 +450,32 @@
     border-radius: 2px; color: var(--blue); letter-spacing: 0.04em;
   }
 
+  .project-preview {
+    position: relative;
+    margin-top: 1.25rem;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-radius: 14px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(41, 98, 255, 0.12), rgba(52, 211, 153, 0.08));
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .preview-placeholder {
+    text-align: center;
+    color: rgba(15, 23, 42, 0.65);
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+
+  .preview-btn {
+    position: absolute;
+    right: 1.25rem;
+    bottom: 1.25rem;
+  }
+
   /* ── AWARDS ── */
   .awards { background: var(--navy); }
   .awards .section-title { color: var(--white); }
@@ -798,9 +824,12 @@
       <div class="project-tags">
         <span class="project-tag">Mermaid</span><span class="project-tag">Architecture</span><span class="project-tag">Prompt Engineering</span><span class="project-tag">UI Demo</span>
       </div>
-      <a href="https://vstephne.github.io/ai-architecture-demo/" class="btn btn-outline" style="margin-top: 1rem; display: inline-block;" target="_blank" rel="noopener">Try it live</a>
-      <div style="margin-top: 1.2rem; border: 1px solid rgba(148,163,184,0.35); border-radius: 14px; overflow: hidden;">
-        <iframe src="https://vstephne.github.io/ai-architecture-demo/" style="width:100%; height:250px; border:0;" title="AI Architecture Generator preview"></iframe>
+      <div class="project-preview" aria-label="Demo preview">
+        <div class="preview-placeholder">
+          <div style="font-weight: 600;">Live demo preview</div>
+          <div style="font-size: 0.85rem;">Click the button to open the full app in a new tab.</div>
+        </div>
+        <a href="https://vstephne.github.io/ai-architecture-demo/" target="_blank" rel="noopener" class="btn btn-outline preview-btn">Open demo</a>
       </div>
     </div>
     <div class="project-card reveal">
